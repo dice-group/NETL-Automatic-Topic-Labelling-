@@ -1,0 +1,14 @@
+*.ipynb
+*.ipynb_checkpoints
+test.py
+./data/we1s_topcis.csv
+./model_run/output_candidates
+./model_run/output_supervised
+./model_run/output_unsupervised
+
+./pre_trained_models/*
+./support_files/svm_rank_src/*
+./support_files/svm_rank_*
+./support_files/pagerank-titles-sorted.txt
+
+!readme.txt
