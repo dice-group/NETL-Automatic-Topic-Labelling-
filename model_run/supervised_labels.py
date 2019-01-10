@@ -3,6 +3,10 @@ Author:         Shraey Bhatia
 Date:           October 2016
 File: 		supervised_labels.py
 
+Updated by:     Sihwa Park
+Date:           January 7, 2019
+Fix:            Updated to work with Python 3.6.5
+
 This python code gives the top supervised labels for that topic. The paramters needed are passed through get_labels.py.
 It generates letter_trigram,pagerank, Topic overlap and num of words in features. Then puts it into SVM classify
 format and finally uses the already trained supervised model to make ranking predictions and get the best label. 
@@ -36,7 +40,7 @@ p_rank_dict ={}
 for line in f2:
     word = line.split()
     p_rank_dict[word[1].lower()] = word[0]
-print "page Rank models loaded"
+print ("page Rank models loaded")
 
 # Get the candidate labels form candiate label file
 label_list =[]
@@ -50,9 +54,9 @@ test_chunk_size = len(label_list[0])
 
 # Number of Supervised labels needed should not be less than the number of candidate labels.
 if test_chunk_size < int(args.num_sup_labels):
-    print "\n"
-    print "Error"
-    print "You cannot extract more labels than present in input file"
+    print ("\n")
+    print ("Error")
+    print ("You cannot extract more labels than present in input file")
     sys.exit() 
 
 # Reading in the topic terms from the topics file.
@@ -62,7 +66,7 @@ try:
     topic_list = new_frame.set_index('topic_id').T.to_dict('list')
 except:
     topic_list = topics.set_index('topic_id').T.to_dict('list')
-print "Data Gathered for supervised model"
+print ("Data Gathered for supervised model")
 
 # Method to get letter trigrams for topic terms.
 def get_topic_lt(elem):
@@ -94,7 +98,7 @@ def get_lt_ranks(lab_list,num):
         total = sum(label_cnt.values(), 0.0)
         for key in label_cnt:
             label_cnt[key] /= total
-        tot_keys = list(set(topic_ls.keys() + label_cnt.keys()))
+        tot_keys = list(set(list(topic_ls.keys()) + list(label_cnt.keys())))
         listtopic = []
         listlabel = []
         for elem in tot_keys:
@@ -122,7 +126,7 @@ temp_lt =[]
 for j in range(0,len(topic_list)):
     temp_lt.append(get_lt_ranks(label_list[j],j))
 letter_trigram_feature = [item for sublist in temp_lt for item in sublist] 
-print "letter trigram feature"
+print ("letter trigram feature")
 #print letter_trigram_feature
 
 # Employed to change the format of features.
@@ -184,7 +188,7 @@ cols = ['label','topic_id','letter_trigram','prank','lab_length','common_words',
 features =['letter_trigram','prank','lab_length','common_words'] # Name of features.
 
 feature_dataset =prepare_features(lt_dict,p_rank_dict,cols,features)
-print "All features generated"
+print ("All features generated")
 
 # This function converts the dataset into a format which is taken by SVM ranker classify binary file.
 
@@ -215,6 +219,7 @@ def get_predictions(test_set,num):
     h.close()
    
     query2 =args.svm_classify + " test_temp.dat "+args.trained_svm_model+" predictionstemp"
+    print(query2)
     os.system(query2)
     h =open("predictionstemp")
     pred_list =[]
@@ -228,18 +233,22 @@ def get_predictions(test_set,num):
     for j in range(len(pred_chunks)):
         max_sort = np.array(pred_chunks[j]).argsort()[::-1][:int(args.num_sup_labels)]
         list_max.append(max_sort)
-    print "\n"
-    print "Printing Labels for supervised model"
+    print ("\n")
+    print ("Printing Labels for supervised model")
     g = open(args.output_supervised,'w')
     for cnt, (x,y) in enumerate(zip(test_chunks,list_max)):
-        print "Top "+args.num_sup_labels+" labels for topic "+str(cnt)+" are:"
-        g.write( "Top "+args.num_sup_labels+" labels for topic "+str(cnt)+" are:" +"\n")
-        for i2 in y:
-            m= re.search('# (.*)',x[i2])
-            print m.group(1)
-            g.write(m.group(1)+"\n")
+        print ("Top "+args.num_sup_labels+" labels for topic "+str(cnt)+" are:")
+        # g.write( "Top "+args.num_sup_labels+" labels for topic "+str(cnt)+" are:" +"\n")
+        g.write(str(cnt) + " ")
 
-        print "\n"
+        for index, i2 in enumerate(y):
+            m= re.search('# (.*)',x[i2])
+            print (m.group(1))
+            g.write(m.group(1))
+            if index != (len(y) - 1):
+                g.write(" ")
+
+        print ("\n")
         g.write("\n")
     g.close()
 

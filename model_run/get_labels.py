@@ -3,6 +3,10 @@ Author:         Shraey Bhatia
 Date:           October 2016
 File:           get_labels.py
 
+Updated by:     Sihwa Park
+Date:           January 7, 2019
+Fix:            Updated to work with Python 3.6.5
+
 It is the script to generate candidate labels, unsupervised best labels and labels from SVM ranker supervised model. 
 Update the parameters in this script. 
 Also after you download the files mentioned in readme and if you keep them in different path change it over here.
@@ -32,33 +36,33 @@ doc2vec_indices_file = "support_files/doc2vec_indices" # The filtered doc2vec in
 word2vec_indices_file = "support_files/word2vec_indices" # The filtered word2vec indices file
 parser.add_argument("-cg", "--candidates", help ="get candidate labels", action = "store_true")
 
-#Unsupevised model parameters
-num_unsup_labels =3 # Number of unsupervised labels needed (In general should be less than candidate labels, till you have your own file and then depends on number of labels)
+#Unsupevised
+num_unsup_labels = 3
 cand_gen_output = "output_candidates" # The file which contains candiate generation output.Also used to get supervised output
 out_unsup = "output_unsupervised" # The Output File name for unsupervised labels
 parser.add_argument("-us", "--unsupervised", help="get unsupervised labels", action="store_true")
 
 #supervised parameters
 num_sup_labels = 3 # Number of supervised labels needed. Should be less than the candidate labels.
-pagerank_model = "support_files/pagerank-titles-sorted.txt" # This is precomputed pagerank model needed to genrate pagerank features.
-svm_classify = "support_files/svm_rank_classify" # SVM rank classify. After you download SVM Ranker classify gibve the path of svm_rank_classify here
-pretrained_svm_model = "support_files/svm_model" # This is trained supervised model on the whole our dataset. Run train train_svm_model.py if you want a new model on different dataset. 
-out_sup ="output_supervised" # The output file for supervised labels.
+pagerank_model = "./support_files/pagerank-titles-sorted.txt" # This is precomputed pagerank model needed to genrate pagerank features.
+svm_classify = "./support_files/svm_rank_classify" # SVM rank classify. After you download SVM Ranker classify gibve the path of svm_rank_classify here
+pretrained_svm_model = "./support_files/svm_model" # This is trained supervised model on the whole our dataset. Run train train_svm_model.py if you want a new model on different dataset. 
+out_sup ="./output_supervised" # The output file for supervised labels.
 parser.add_argument("-s", "--supervised", help ="get supervised labels", action ="store_true")
 
 args = parser.parse_args()
 if args.candidates:  # It calls unsupervised_labels python file to get labels in unsupervised way
-    query1 = "python cand_generation.py "+str(num_candidates)+" "+doc2vecmodel+" "+word2vecmodel+" "+data+" "+output_filename +" "+doc2vec_indices_file+" "+word2vec_indices_file
-    print "Extracting candidate labels"
+    query1 = "python3 cand_generation.py "+str(num_candidates)+" "+doc2vecmodel+" "+word2vecmodel+" "+data+" "+output_filename +" "+doc2vec_indices_file+" "+word2vec_indices_file
+    print ("Extracting candidate labels")
     os.system(query1)
 
 if args.unsupervised:  # It calls unsupervised_labels python file to get labels in unsupervised way
-    query2 = "python unsupervised_labels.py "+str(num_unsup_labels)+" "+data+" "+cand_gen_output +" "+out_unsup
-    print "Executing Unsupervised model"
+    query2 = "python3 unsupervised_labels.py "+str(num_unsup_labels)+" "+data+" "+cand_gen_output +" "+out_unsup
+    print ("Executing Unsupervised model")
     os.system(query2)
 
 if args.supervised:  # It calls supervised_labels python file to get labels in supervised way.
-    query3 = "python supervised_labels.py " +str(num_sup_labels)+" "+pagerank_model+" "+data+" "+cand_gen_output+" "+svm_classify+" "+pretrained_svm_model+" "+out_sup
-    print "Executing Supervised Model"
+    query3 = "python3 supervised_labels.py " +str(num_sup_labels)+" "+pagerank_model+" "+data+" "+cand_gen_output+" "+svm_classify+" "+pretrained_svm_model+" "+out_sup
+    print ("Executing Supervised Model")
     os.system(query3)
 

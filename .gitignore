@@ -1,5 +1,6 @@
-*.ipynb
-*.ipynb_checkpoints
+./model_run/automatic_topic_labelling_WE1S.ipynb
+./model_run/automatic_topic_labelling.ipynb
+./model_run/.ipynb_checkpoints/*
 test.py
 ./data/we1s_topcis.csv
 ./model_run/output_candidates
