@@ -239,14 +239,14 @@ def get_predictions(test_set,num):
     for cnt, (x,y) in enumerate(zip(test_chunks,list_max)):
         print ("Top "+args.num_sup_labels+" labels for topic "+str(cnt)+" are:")
         # g.write( "Top "+args.num_sup_labels+" labels for topic "+str(cnt)+" are:" +"\n")
-        g.write(str(cnt) + " ")
+        g.write(str(cnt) + ",")
 
         for index, i2 in enumerate(y):
             m= re.search('# (.*)',x[i2])
             print (m.group(1))
             g.write(m.group(1))
             if index != (len(y) - 1):
-                g.write(" ")
+                g.write(",")
 
         print ("\n")
         g.write("\n")

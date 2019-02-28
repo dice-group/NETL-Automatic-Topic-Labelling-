@@ -106,12 +106,12 @@ g = open(args.output_unsupervised,'w')
 for i,item in enumerate(unsup_output):
     print ("top " +args.num_unsup_labels+ " labels for topic " +str(i) +" are:")
     # g.write("top " +args.num_unsup_labels+ " labels for topic " +str(i) +" are:" +"\n")
-    g.write(str(i) + " ")
+    g.write(str(i) + ",")
     for index, elem in enumerate(item):
         print (elem)
         g.write(elem)
         if index != (len(item) - 1):
-            g.write(" ")
+            g.write(",")
 
     print ("\n")
     g.write("\n")

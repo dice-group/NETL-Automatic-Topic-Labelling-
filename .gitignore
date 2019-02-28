@@ -12,4 +12,8 @@ test.py
 ./support_files/svm_rank_*
 ./support_files/pagerank-titles-sorted.txt
 
+./model_run/*.csv
+./model_run/data/*csv
+
 !readme.txt
+
