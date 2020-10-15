@@ -25,7 +25,8 @@ import argparse
 parser = argparse.ArgumentParser()
 
 #Common Parameters
-data ="toy_data/toytopics.csv" # The file in csv format which contains the topic terms that needs a label. 
+parser.add_argument("--data", action="store", default="toy_data/toytopics.csv") # The file in csv format which contains the topic terms that needs a label.
+
 
 #Parameters for candidate Generation of Labels
 doc2vecmodel = "pre_trained_models/doc2vec/docvecmodel.d2v" # Path for Doc2vec Model.
@@ -51,6 +52,9 @@ out_sup ="./output_supervised" # The output file for supervised labels.
 parser.add_argument("-s", "--supervised", help ="get supervised labels", action ="store_true")
 
 args = parser.parse_args()
+
+data = args.data
+
 if args.candidates:  # It calls unsupervised_labels python file to get labels in unsupervised way
     query1 = "python3 cand_generation.py "+str(num_candidates)+" "+doc2vecmodel+" "+word2vecmodel+" "+data+" "+output_filename +" "+doc2vec_indices_file+" "+word2vec_indices_file
     print ("Extracting candidate labels")
