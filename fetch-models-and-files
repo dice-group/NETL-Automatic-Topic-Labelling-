@@ -1,0 +1,7 @@
+#!/bin/sh
+wget https://hobbitdata.informatik.uni-leipzig.de/netl/doc2vec.tgz -O - |tar -xz -C model_run/pre_trained_models
+wget https://hobbitdata.informatik.uni-leipzig.de/netl/word2vec.tgz -O - |tar -xz -C model_run/pre_trained_models
+wget https://hobbitdata.informatik.uni-leipzig.de/netl/pagerank-titles-sorted.txt.gz -P model_run/support_files
+wget https://hobbitdata.informatik.uni-leipzig.de/netl/short_label_documents.gz -P model_run/support_files
+wget https://hobbitdata.informatik.uni-leipzig.de/netl/word2vec_phrases_list_tokenized.txt.gz -P model_run/support_files
+gunzip model_run/support_files/*.gz
