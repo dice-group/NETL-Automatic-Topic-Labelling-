@@ -1,19 +1,18 @@
-./model_run/automatic_topic_labelling_WE1S.ipynb
-./model_run/automatic_topic_labelling.ipynb
-./model_run/.ipynb_checkpoints/*
-test.py
-./data/we1s_topcis.csv
-./model_run/output_candidates
-./model_run/output_supervised
-./model_run/output_unsupervised
+/model_run/automatic_topic_labelling_WE1S.ipynb
+/model_run/automatic_topic_labelling.ipynb
+/model_run/.ipynb_checkpoints/*
+/test.py
+/data/we1s_topcis.csv
+/model_run/output_candidates
+/model_run/output_supervised
+/model_run/output_unsupervised
 
-./pre_trained_models/*
-./support_files/svm_rank_src/*
-./support_files/svm_rank_*
-./support_files/pagerank-titles-sorted.txt
+/model_run/pre_trained_models/*
+/model_run/support_files/svm_rank_src/*
+/model_run/support_files/svm_rank_*
+/model_run/support_files/pagerank-titles-sorted.txt
 
-./model_run/*.csv
-./model_run/data/*.csv
+/model_run/*.csv
+/model_run/data/*.csv
 
 !readme.txt
-
