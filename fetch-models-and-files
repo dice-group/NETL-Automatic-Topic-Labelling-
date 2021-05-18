@@ -4,4 +4,5 @@ wget https://hobbitdata.informatik.uni-leipzig.de/netl/word2vec.tgz -O - |tar -x
 wget https://hobbitdata.informatik.uni-leipzig.de/netl/pagerank-titles-sorted.txt.gz -P model_run/support_files
 wget https://hobbitdata.informatik.uni-leipzig.de/netl/short_label_documents.gz -P model_run/support_files
 wget https://hobbitdata.informatik.uni-leipzig.de/netl/word2vec_phrases_list_tokenized.txt.gz -P model_run/support_files
+wget https://hobbitdata.informatik.uni-leipzig.de/netl/svm_rank_linux64.tar.gz -O - |tar -xz -C model_run/support_files
 gunzip model_run/support_files/*.gz

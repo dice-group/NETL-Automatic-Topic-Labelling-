@@ -11,6 +11,9 @@
 /model_run/support_files/svm_rank_src/*
 /model_run/support_files/svm_rank_*
 /model_run/support_files/pagerank-titles-sorted.txt
+/model_run/support_files/LICENSE.txt
+/model_run/support_files/short_label_documents
+/model_run/support_files/word2vec_phrases_list_tokenized.txt
 
 /model_run/*.csv
 /model_run/data/*.csv
