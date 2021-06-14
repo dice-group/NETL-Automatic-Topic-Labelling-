@@ -95,8 +95,8 @@ def get_word(word):
         return word
 
 def get_labels(topic_num):
-    valdoc2vec = 0.0
-    valword2vec = 0.0
+    valdoc2vec = zeros(len(model1.docvecs.vectors_docs_norm))
+    valword2vec = zeros(len(model3))
     cnt = 0
     store_indices = []
 
